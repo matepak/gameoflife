@@ -15,15 +15,15 @@ namespace dotnetcore_gameoflife
 			}
 
 			World world = new World(args[0]);
-            while(true)
-            {
-                Console.Clear();
-                Console.WriteLine($"Grid size: {World.Grid.GetUpperBound(0).ToString()} x {World.Grid.GetUpperBound(1)}");
-                Console.WriteLine($"Generation Nr: {World.GenerationNumber}");
-                Console.WriteLine(world.DisplayGrid());
-                world.NextGeneration();
-                System.Threading.Thread.Sleep(500);
-            }
+			while (true)
+			{
+				Console.Clear();
+				Console.WriteLine($"Grid size: {World.Grid.GetUpperBound(0).ToString()} x {World.Grid.GetUpperBound(1)}");
+				Console.WriteLine($"Generation Nr: {World.GenerationNumber}");
+				Console.WriteLine(world.DisplayGrid());
+				world.NextGeneration();
+				System.Threading.Thread.Sleep(500);
+			}
 		}
 	}
 
@@ -56,34 +56,34 @@ namespace dotnetcore_gameoflife
 				}
 			}
 		}
-        public static int GenerationNumber = 0;
+		public static int GenerationNumber = 0;
 		public static bool[,] Grid { set; get; }
 		private List<Cell> Cells { set; get; } = new List<Cell>();
 
-        public string GetCells()
-        {
-            string cells = "";
-            foreach (Cell cell in Cells)
+		public string GetCells()
+		{
+			string cells = "";
+			foreach (Cell cell in Cells)
 			{
 				cells += $"Row: {cell.Row},  Column: {cell.Column}, IsAlive: {cell.IsAlive}";
-                cells += "\n";
+				cells += "\n";
 				cells += $" no of neighbours: {cell.NumberOfNeighbours()}";
-                cells += "\n";
-			} 
+				cells += "\n";
+			}
 
-            return cells;
-        }
+			return cells;
+		}
 
-        public void NextGeneration()
-        {
-            bool[,] tempGrid = new bool[Grid.GetUpperBound(0)+1, Grid.GetUpperBound(1)+1];
-            foreach (Cell cell in Cells)
-            {
-                tempGrid[cell.Row, cell.Column] = cell.Tick();
-            }
-            Grid = tempGrid;
-            GenerationNumber++;
-        }
+		public void NextGeneration()
+		{
+			bool[,] tempGrid = new bool[Grid.GetUpperBound(0) + 1, Grid.GetUpperBound(1) + 1];
+			foreach (Cell cell in Cells)
+			{
+				tempGrid[cell.Row, cell.Column] = cell.Tick();
+			}
+			Grid = tempGrid;
+			GenerationNumber++;
+		}
 
 		public string DisplayGrid()
 		{
@@ -96,9 +96,9 @@ namespace dotnetcore_gameoflife
 					else grid += DEAD;
 				}
 				grid += "\n";
- 
+
 			}
-            return grid;
+			return grid;
 		}
 
 		protected class Cell
@@ -129,33 +129,33 @@ namespace dotnetcore_gameoflife
 			bool Upper() => World.Grid[Row - 1, Column];
 			bool UpperRight() => World.Grid[Row - 1, Column + 1];
 			bool Left()
-            {
-                //if (Column == 1) {return World.Grid[Row, World.Grid.GetUpperBound(1)-1];}
-                return World.Grid[Row, Column - 1];
-            }
+			{
+				//if (Column == 1) {return World.Grid[Row, World.Grid.GetUpperBound(1)-1];}
+				return World.Grid[Row, Column - 1];
+			}
 			bool Right()
-            {
-                //if (Column == World.Grid.GetUpperBound(1)-1) {return World.Grid[Row, 1];}
-                return World.Grid[Row, Column + 1];
-            }
+			{
+				//if (Column == World.Grid.GetUpperBound(1)-1) {return World.Grid[Row, 1];}
+				return World.Grid[Row, Column + 1];
+			}
 			bool LowerRight() => World.Grid[Row + 1, Column + 1];
 			bool Lower() => World.Grid[Row + 1, Column];
 			bool LowerLeft() => World.Grid[Row + 1, Column - 1];
 
-            public bool Tick()
-            {
-                if(!IsAlive && NumberOfNeighbours() == 3)
-                { 
-                    IsAlive = true;
-                    return true;
-                }
+			public bool Tick()
+			{
+				if (!IsAlive && NumberOfNeighbours() == 3)
+				{
+					IsAlive = true;
+					return true;
+				}
 
-                if((IsAlive && NumberOfNeighbours() == 2) || (IsAlive && NumberOfNeighbours() == 3))
-                {
-                    return true;
-                }
-                return false;
-            }
+				if ((IsAlive && NumberOfNeighbours() == 2) || (IsAlive && NumberOfNeighbours() == 3))
+				{
+					return true;
+				}
+				return false;
+			}
 		}
 	}
 }
