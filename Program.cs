@@ -130,12 +130,12 @@ namespace dotnetcore_gameoflife
 			bool UpperRight() => World.Grid[Row - 1, Column + 1];
 			bool Left()
             {
-                if (Column == 1) {return World.Grid[Row, World.Grid.GetUpperBound(1)-1];}
+                //if (Column == 1) {return World.Grid[Row, World.Grid.GetUpperBound(1)-1];}
                 return World.Grid[Row, Column - 1];
             }
 			bool Right()
             {
-                if (Column == World.Grid.GetUpperBound(1)-1) {return World.Grid[Row, 1];}
+                //if (Column == World.Grid.GetUpperBound(1)-1) {return World.Grid[Row, 1];}
                 return World.Grid[Row, Column + 1];
             }
 			bool LowerRight() => World.Grid[Row + 1, Column + 1];
