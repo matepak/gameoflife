@@ -37,3 +37,6 @@ Seed file contains initial pattern an entry point for the first generation.
 ############################
 
 ```
+## In action!
+
+![glider_gun_example](https://github.com/matepak/gameoflife/blob/main/glider_gun.gif)
